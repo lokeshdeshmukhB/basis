@@ -2,30 +2,41 @@
 
 import dotenv from "dotenv";
 import express from "express";
-import { connectDB } from "./db/index.js";
+import connectDB from "./db/index.js";
 import { DB_NAME } from "./constants.js";
+import app from "./app.js";
 
 dotenv.config({
   path: "./.env",
 });
 
-const app = express();
-app.use(express.json());
+connectDB()
+  .then(() => {
+    app.listen(process.env.PORT || 8000, () => {
+      console.log(
+        `Server is running on port ${process.env.PORT} and connected to DB: ${DB_NAME}`
+      );
+    });
+  })
+  .catch((error) => {
+    console.error("Failed to connect to the database", error);
+  });
+// app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Server running...");
-});
+// app.get("/", (req, res) => {
+//   res.send("Server running...");
+// });
 
-const PORT = process.env.PORT || 5000;
+// const PORT = process.env.PORT || 5000;
 
-(async () => {
-  try {
-    await connectDB();
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-  } catch (error) {
-    console.error("Server startup error:", error);
-  }
-})();
+// (async () => {
+//   try {
+//     await connectDB();
+//     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+//   } catch (error) {
+//     console.error("Server startup error:", error);
+//   }
+// })();
 
 /*
 import express from express;
