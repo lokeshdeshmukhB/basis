@@ -2,13 +2,13 @@
   "name": "chai_aur_project",
   "version": "1.0.0",
   "description": "a backend ",
-  "types": "module",
+  "type": "module",
   "keywords": [
     "javascript"
   ],
   "license": "ISC",
   "author": "Lokesh Sunil Deshmukh",
-  "type": "commonjs",
+  
   "main": "index.js",
   "scripts": {
     "dev": "nodemon src/index.js"
@@ -16,5 +16,10 @@
   "devDependencies": {
     "nodemon": "^3.1.11",
     "prettier": "^3.7.4"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mongoose": "^9.0.1"
   }
 }
