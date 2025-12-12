@@ -50,7 +50,7 @@ const UseSchema=new mongoose.Schema({
 })
 userSchema.pre('save',async function(next){
   if(!this.isModified("password")) return next();
-  this.password=brcypt.hashSync(this.password,10)
+  this.password=await brcypt.hash(this.password,10)
   next()
 })
 userSchema.methods.isPasswordCorrect=async function (password){
